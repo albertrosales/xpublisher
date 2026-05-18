@@ -3,456 +3,88 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>XPublisher — @Mastv_hn</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@500;700&display=swap" rel="stylesheet" />
+<title>TweetGen — @Mastv_hn</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@500;700;800&display=swap" rel="stylesheet" />
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
 :root {
-  --bg: #0a0a0a;
-  --surface: #111111;
-  --surface2: #1a1a1a;
-  --border: #222222;
-  --border2: #2e2e2e;
-  --text: #f0f0f0;
-  --muted: #666;
-  --muted2: #444;
-  --accent: #e7ff52;
-  --accent-dim: #c8e030;
-  --x-blue: #1d9bf0;
-  --success: #22c55e;
-  --danger: #ef4444;
-  --warning: #f59e0b;
-  --radius: 10px;
-  --radius-sm: 6px;
+  --bg: #0a0a0a; --surface: #111; --surface2: #181818;
+  --border: #1e1e1e; --border2: #2a2a2a;
+  --text: #f0f0f0; --muted: #555; --muted2: #333;
+  --accent: #e7ff52; --accent-dim: #c8e030;
+  --success: #22c55e; --danger: #ef4444; --warning: #f59e0b;
+  --radius: 12px; --radius-sm: 7px;
 }
-
-body {
-  background: var(--bg);
-  color: var(--text);
-  font-family: 'DM Mono', monospace;
-  font-size: 14px;
-  line-height: 1.6;
-  min-height: 100vh;
-}
-
-.topbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 16px 24px;
-  border-bottom: 1px solid var(--border);
-  position: sticky;
-  top: 0;
-  background: var(--bg);
-  z-index: 100;
-}
-
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.brand-icon {
-  width: 32px;
-  height: 32px;
-  background: var(--accent);
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.brand-icon svg { width: 18px; height: 18px; fill: #000; }
-
-.brand-name {
-  font-family: 'Syne', sans-serif;
-  font-size: 16px;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-}
-
-.brand-handle {
-  font-size: 11px;
-  color: var(--muted);
-}
-
-.status-pill {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  padding: 5px 12px;
-  border-radius: 20px;
-  font-size: 12px;
-  border: 1px solid var(--border);
-  color: var(--muted);
-  transition: all 0.2s;
-}
-
-.status-pill.ok { border-color: var(--success); color: var(--success); }
-.status-pill.error { border-color: var(--danger); color: var(--danger); }
-.status-pill.loading { border-color: var(--accent); color: var(--accent); }
-
-.dot {
-  width: 6px; height: 6px;
-  border-radius: 50%;
-  background: currentColor;
-}
-
-.dot.pulse { animation: pulse 1.5s infinite; }
-@keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
-
-.layout {
-  display: grid;
-  grid-template-columns: 240px 1fr;
-  min-height: calc(100vh - 65px);
-}
-
-.sidebar {
-  border-right: 1px solid var(--border);
-  padding: 20px 0;
-}
-
-.nav-item {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 10px 20px;
-  cursor: pointer;
-  color: var(--muted);
-  font-size: 13px;
-  border-left: 2px solid transparent;
-  transition: all 0.15s;
-}
-
+body { background: var(--bg); color: var(--text); font-family: 'DM Mono', monospace; font-size: 14px; line-height: 1.6; min-height: 100vh; }
+.topbar { display: flex; align-items: center; justify-content: space-between; padding: 14px 24px; border-bottom: 1px solid var(--border); position: sticky; top: 0; background: var(--bg); z-index: 100; }
+.brand { display: flex; align-items: center; gap: 10px; }
+.brand-icon { width: 30px; height: 30px; background: var(--accent); border-radius: 8px; display: flex; align-items: center; justify-content: center; }
+.brand-icon svg { width: 16px; height: 16px; fill: #000; }
+.brand-name { font-family: 'Syne', sans-serif; font-size: 15px; font-weight: 800; }
+.brand-sub { font-size: 11px; color: var(--muted); }
+.layout { display: grid; grid-template-columns: 200px 1fr 320px; min-height: calc(100vh - 57px); }
+.sidebar { border-right: 1px solid var(--border); padding: 16px 0; }
+.nav-section { font-size: 10px; color: var(--muted2); text-transform: uppercase; letter-spacing: 0.1em; padding: 14px 16px 5px; }
+.nav-item { display: flex; align-items: center; gap: 9px; padding: 9px 16px; cursor: pointer; color: var(--muted); font-size: 13px; border-left: 2px solid transparent; transition: all 0.12s; }
 .nav-item:hover { color: var(--text); background: var(--surface); }
-.nav-item.active { color: var(--accent); border-left-color: var(--accent); background: #0f1200; }
-.nav-item svg { width: 16px; height: 16px; flex-shrink: 0; }
-
-.sidebar-section {
-  font-size: 10px;
-  color: var(--muted2);
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  padding: 16px 20px 6px;
-}
-
-.main {
-  padding: 24px;
-  max-width: 900px;
-}
-
-.page { display: none; }
-.page.active { display: block; }
-
-.page-header {
-  margin-bottom: 24px;
-}
-
-.page-title {
-  font-family: 'Syne', sans-serif;
-  font-size: 22px;
-  font-weight: 700;
-  margin-bottom: 4px;
-}
-
-.page-desc { color: var(--muted); font-size: 13px; }
-
-.btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 8px 16px;
-  border-radius: var(--radius-sm);
-  font-family: 'DM Mono', monospace;
-  font-size: 13px;
-  cursor: pointer;
-  border: 1px solid var(--border2);
-  background: var(--surface);
-  color: var(--text);
-  transition: all 0.15s;
-}
-
-.btn:hover { background: var(--surface2); border-color: var(--border2); }
+.nav-item.active { color: var(--accent); border-left-color: var(--accent); background: #0d1000; }
+.nav-item svg { width: 15px; height: 15px; flex-shrink: 0; }
+.feed-sidebar-item { display: flex; align-items: center; gap: 6px; padding: 6px 16px 6px 20px; font-size: 11px; color: var(--muted); }
+.feed-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+.main-area { padding: 20px 24px; overflow-y: auto; }
+.toolbar { display: flex; align-items: center; gap: 8px; margin-bottom: 18px; flex-wrap: wrap; }
+.btn { display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px; border-radius: var(--radius-sm); font-family: 'DM Mono', monospace; font-size: 12px; cursor: pointer; border: 1px solid var(--border2); background: var(--surface); color: var(--text); transition: all 0.12s; white-space: nowrap; }
+.btn:hover { background: var(--surface2); }
 .btn:disabled { opacity: 0.4; cursor: not-allowed; }
-
-.btn-accent {
-  background: var(--accent);
-  color: #000;
-  border-color: var(--accent);
-  font-weight: 500;
-}
-.btn-accent:hover { background: var(--accent-dim); border-color: var(--accent-dim); }
-
-.btn-sm { padding: 5px 10px; font-size: 12px; }
-
-.btn-publish {
-  background: #000;
-  color: #fff;
-  border-color: #333;
-}
-.btn-publish:hover { background: #111; }
-
-.toolbar {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 20px;
-}
-
-.feed-count {
-  margin-left: auto;
-  font-size: 12px;
-  color: var(--muted);
-}
-
-.news-list { display: flex; flex-direction: column; gap: 12px; }
-
-.news-card {
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  background: var(--surface);
-  overflow: hidden;
-  transition: border-color 0.15s;
-}
-
-.news-card:hover { border-color: var(--border2); }
-.news-card.published { opacity: 0.6; }
-
-.news-card-top {
-  display: flex;
-  gap: 0;
-}
-
-.news-img {
-  width: 100px;
-  height: 80px;
-  object-fit: cover;
-  flex-shrink: 0;
-  background: var(--surface2);
-}
-
-.news-img-placeholder {
-  width: 100px;
-  height: 80px;
-  flex-shrink: 0;
-  background: var(--surface2);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--muted2);
-}
-
-.news-body {
-  padding: 12px 14px;
-  flex: 1;
-  min-width: 0;
-}
-
-.news-title {
-  font-family: 'Syne', sans-serif;
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 1.4;
-  margin-bottom: 4px;
-  color: var(--text);
-}
-
-.news-desc {
-  font-size: 12px;
-  color: var(--muted);
-  line-height: 1.5;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  margin-bottom: 6px;
-}
-
-.news-meta {
-  font-size: 11px;
-  color: var(--muted2);
-}
-
-.news-footer {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 14px;
-  border-top: 1px solid var(--border);
-  background: var(--bg);
-}
-
-.tweet-preview-text {
-  flex: 1;
-  font-size: 11px;
-  color: var(--muted);
-  font-style: italic;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  padding: 3px 8px;
-  border-radius: 20px;
-  font-size: 11px;
-}
-
-.badge-ok { background: #052e16; color: var(--success); border: 1px solid #166534; }
-.badge-pending { background: #1c1500; color: var(--warning); border: 1px solid #854d0e; }
-
-.card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 16px 20px;
-  margin-bottom: 16px;
-}
-
-.card-label {
-  font-size: 11px;
-  color: var(--muted);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  margin-bottom: 12px;
-}
-
-.feed-item {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 10px;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  margin-bottom: 6px;
-  background: var(--bg);
-}
-
-.feed-item span {
-  flex: 1;
-  font-size: 12px;
-  color: var(--text);
-  word-break: break-all;
-}
-
-.feed-del {
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: var(--muted2);
-  padding: 2px 4px;
-  font-size: 16px;
-  line-height: 1;
-  transition: color 0.15s;
-}
-
+.btn-accent { background: var(--accent); color: #000; border-color: var(--accent); font-weight: 500; }
+.btn-accent:hover { background: var(--accent-dim); }
+.sort-select { background: var(--surface); border: 1px solid var(--border2); border-radius: var(--radius-sm); color: var(--text); font-family: 'DM Mono', monospace; font-size: 12px; padding: 7px 10px; cursor: pointer; outline: none; }
+.count-badge { margin-left: auto; font-size: 11px; color: var(--muted); background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 3px 10px; }
+.news-grid { display: flex; flex-direction: column; gap: 8px; }
+.news-card { border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); cursor: pointer; transition: border-color 0.12s, background 0.12s; overflow: hidden; }
+.news-card:hover { border-color: var(--border2); background: var(--surface2); }
+.news-card.selected { border-color: var(--accent); background: #0d1000; }
+.news-card-inner { display: flex; }
+.news-thumb { width: 80px; min-height: 70px; object-fit: cover; flex-shrink: 0; }
+.news-thumb-ph { width: 80px; min-height: 70px; flex-shrink: 0; background: var(--surface2); display: flex; align-items: center; justify-content: center; color: var(--muted2); font-size: 20px; }
+.news-body { padding: 10px 12px; flex: 1; min-width: 0; }
+.news-title { font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 500; line-height: 1.4; margin-bottom: 3px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.news-desc { font-size: 11px; color: var(--muted); line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; margin-bottom: 4px; }
+.news-meta { font-size: 10px; color: var(--muted2); }
+.panel { border-left: 1px solid var(--border); padding: 20px; display: flex; flex-direction: column; gap: 14px; position: sticky; top: 57px; height: calc(100vh - 57px); overflow-y: auto; }
+.panel-title { font-family: 'Syne', sans-serif; font-size: 12px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; }
+.tweet-box { background: var(--surface2); border: 1px solid var(--border2); border-radius: var(--radius); padding: 14px; display: flex; flex-direction: column; gap: 10px; }
+.tweet-textarea { background: none; border: none; color: var(--text); font-family: 'DM Mono', monospace; font-size: 13px; line-height: 1.6; resize: none; outline: none; min-height: 130px; width: 100%; }
+.char-counter { display: flex; align-items: center; justify-content: space-between; font-size: 11px; }
+.char-num { font-weight: 500; font-size: 16px; }
+.char-num.ok { color: var(--success); }
+.char-num.warn { color: var(--warning); }
+.char-num.over { color: var(--danger); }
+.char-bar { height: 3px; background: var(--border2); border-radius: 2px; overflow: hidden; }
+.char-bar-fill { height: 100%; border-radius: 2px; transition: width 0.15s, background 0.15s; }
+.btn-copy { background: var(--accent); color: #000; border-color: var(--accent); font-weight: 500; justify-content: center; padding: 10px; font-size: 13px; width: 100%; }
+.btn-copy:hover { background: var(--accent-dim); }
+.btn-open-x { background: #000; color: #fff; border-color: #333; justify-content: center; padding: 9px; font-size: 13px; width: 100%; }
+.btn-open-x:hover { background: #111; }
+.copied-msg { text-align: center; font-size: 11px; color: var(--success); height: 14px; }
+.panel-empty { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; color: var(--muted); font-size: 12px; text-align: center; gap: 10px; }
+.panel-empty svg { width: 30px; height: 30px; opacity: 0.2; }
+.page { display: none; padding: 20px 24px; }
+.page.active { display: block; }
+.page-title { font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 700; margin-bottom: 4px; }
+.page-desc { font-size: 12px; color: var(--muted); margin-bottom: 20px; }
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; margin-bottom: 14px; }
+.card-label { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 10px; }
+.feed-item { display: flex; align-items: center; gap: 8px; padding: 8px 10px; border: 1px solid var(--border); border-radius: var(--radius-sm); margin-bottom: 6px; background: var(--bg); font-size: 12px; }
+.feed-item span { flex: 1; word-break: break-all; }
+.feed-del { background: none; border: none; cursor: pointer; color: var(--muted2); font-size: 16px; line-height: 1; transition: color 0.12s; }
 .feed-del:hover { color: var(--danger); }
-
-.add-row {
-  display: flex;
-  gap: 8px;
-  margin-top: 8px;
-}
-
-input[type="text"], input[type="password"] {
-  background: var(--bg);
-  border: 1px solid var(--border2);
-  border-radius: var(--radius-sm);
-  color: var(--text);
-  font-family: 'DM Mono', monospace;
-  font-size: 13px;
-  padding: 8px 12px;
-  width: 100%;
-  outline: none;
-  transition: border-color 0.15s;
-}
-
-input:focus { border-color: var(--accent); }
-
-.cred-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-  margin-bottom: 12px;
-}
-
-.cred-field label {
-  display: block;
-  font-size: 11px;
-  color: var(--muted);
-  margin-bottom: 4px;
-}
-
-.toast {
-  position: fixed;
-  bottom: 24px;
-  right: 24px;
-  padding: 12px 18px;
-  border-radius: var(--radius);
-  font-size: 13px;
-  z-index: 999;
-  transform: translateY(80px);
-  opacity: 0;
-  transition: all 0.3s;
-  border: 1px solid;
-  max-width: 320px;
-}
-
-.toast.show { transform: translateY(0); opacity: 1; }
-.toast.success { background: #052e16; color: var(--success); border-color: #166534; }
-.toast.error { background: #1c0707; color: var(--danger); border-color: #991b1b; }
-.toast.info { background: #0f1200; color: var(--accent); border-color: #3d5200; }
-
-.empty-state {
-  text-align: center;
-  padding: 48px 24px;
-  color: var(--muted);
-  font-size: 13px;
-}
-
-.spinner {
-  display: inline-block;
-  width: 12px;
-  height: 12px;
-  border: 2px solid currentColor;
-  border-top-color: transparent;
-  border-radius: 50%;
-  animation: spin 0.6s linear infinite;
-  flex-shrink: 0;
-}
+input[type="text"] { background: var(--bg); border: 1px solid var(--border2); border-radius: var(--radius-sm); color: var(--text); font-family: 'DM Mono', monospace; font-size: 12px; padding: 8px 12px; width: 100%; outline: none; transition: border-color 0.12s; }
+input[type="text"]:focus { border-color: var(--accent); }
+.add-row { display: flex; gap: 8px; margin-top: 8px; }
+.spinner { display: inline-block; width: 11px; height: 11px; border: 2px solid currentColor; border-top-color: transparent; border-radius: 50%; animation: spin 0.6s linear infinite; }
 @keyframes spin { to { transform: rotate(360deg); } }
-
-.stat-row {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-  margin-bottom: 20px;
-}
-
-.stat-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 14px 16px;
-}
-
-.stat-val {
-  font-family: 'Syne', sans-serif;
-  font-size: 28px;
-  font-weight: 700;
-  color: var(--accent);
-}
-
-.stat-lbl {
-  font-size: 11px;
-  color: var(--muted);
-  margin-top: 2px;
-}
+.empty-state { text-align: center; padding: 40px; color: var(--muted); font-size: 12px; }
 </style>
 </head>
 <body>
@@ -463,330 +95,235 @@ input:focus { border-color: var(--accent); }
       <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
     </div>
     <div>
-      <div class="brand-name">XPublisher</div>
-      <div class="brand-handle">@Mastv_hn · Más Televisión</div>
+      <div class="brand-name">TweetGen</div>
+      <div class="brand-sub">@Mastv_hn · Más Televisión</div>
     </div>
   </div>
-  <div id="status-pill" class="status-pill">
-    <div class="dot"></div>
-    <span id="status-text">Listo</span>
-  </div>
+  <span id="top-status" style="font-size:11px;color:var(--muted)">Listo</span>
 </div>
 
 <div class="layout">
+
   <nav class="sidebar">
-    <div class="sidebar-section">Principal</div>
-    <div class="nav-item active" onclick="goTo('noticias', this)">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"/></svg>
+    <div class="nav-section">Principal</div>
+    <div class="nav-item active" onclick="goTo('noticias',this)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125V18a2.25 2.25 0 01-2.25 2.25M16.5 7.5V18a2.25 2.25 0 002.25 2.25M16.5 7.5V4.875c0-.621-.504-1.125-1.125-1.125H4.125C3.504 3.75 3 4.254 3 4.875V18a2.25 2.25 0 002.25 2.25h13.5M6 7.5h3v3H6v-3z"/></svg>
       Noticias
     </div>
-    <div class="nav-item" onclick="goTo('historial', this)">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-      Historial
-    </div>
-    <div class="sidebar-section">Configuración</div>
-    <div class="nav-item" onclick="goTo('feeds', this)">
+    <div class="nav-item" onclick="goTo('feeds',this)">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12.75 19.5v-.75a7.5 7.5 0 00-7.5-7.5H4.5m0-6.75h.75c7.87 0 14.25 6.38 14.25 14.25v.75M6 18.75a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"/></svg>
       Feeds RSS
     </div>
-    <div class="nav-item" onclick="goTo('credenciales', this)">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15.75 5.25a3 3 0 013 3m3 0a6 6 0 01-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v2.25H6v2.25H2.25v-2.818c0-.597.237-1.17.659-1.591l6.499-6.499c.404-.404.527-1 .43-1.563A6 6 0 1121.75 8.25z"/></svg>
-      Credenciales API
-    </div>
+    <div class="nav-section">Fuentes</div>
+    <div id="sidebar-feeds"></div>
   </nav>
 
-  <main class="main">
+  <div id="main-noticias" class="main-area">
+    <div class="toolbar">
+      <button class="btn btn-accent" onclick="loadNews()" id="btn-load">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+        Cargar noticias
+      </button>
+      <select class="sort-select" id="sort-select" onchange="sortAndRender()">
+        <option value="recientes">Más recientes</option>
+        <option value="largo">Titular más largo</option>
+        <option value="corto">Titular más corto</option>
+      </select>
+      <span class="count-badge" id="count-badge" style="display:none">0</span>
+    </div>
+    <div id="news-grid" class="news-grid">
+      <div class="empty-state">Haz clic en "Cargar noticias" para comenzar.</div>
+    </div>
+  </div>
 
-    <!-- NOTICIAS -->
-    <div id="page-noticias" class="page active">
-      <div class="page-header">
-        <div class="page-title">Noticias</div>
-        <div class="page-desc">Carga los últimos artículos de tus feeds RSS y publícalos en X.</div>
-      </div>
-
-      <div class="stat-row">
-        <div class="stat-card">
-          <div class="stat-val" id="stat-total">0</div>
-          <div class="stat-lbl">Artículos cargados</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-val" id="stat-publicados">0</div>
-          <div class="stat-lbl">Publicados hoy</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-val" id="stat-pendientes">0</div>
-          <div class="stat-lbl">Pendientes</div>
-        </div>
-      </div>
-
-      <div class="toolbar">
-        <button class="btn btn-accent" onclick="loadNews()" id="btn-load">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
-          Cargar noticias
-        </button>
-        <button class="btn" onclick="publishAll()" id="btn-all" style="display:none">Publicar todos pendientes</button>
-        <span class="feed-count" id="feed-count"></span>
-      </div>
-
-      <div id="news-list" class="news-list">
-        <div class="empty-state">Haz clic en "Cargar noticias" para comenzar.</div>
+  <div id="main-feeds" class="page" style="grid-column:2/4">
+    <div class="page-title">Feeds RSS</div>
+    <div class="page-desc">Agrega o elimina fuentes de noticias.</div>
+    <div class="card">
+      <div class="card-label">Fuentes activas</div>
+      <div id="feed-list-ui"></div>
+      <div class="add-row">
+        <input type="text" id="new-feed-input" placeholder="https://sitio.com/feed" />
+        <button class="btn btn-accent" onclick="addFeed()">+ Agregar</button>
       </div>
     </div>
+  </div>
 
-    <!-- HISTORIAL -->
-    <div id="page-historial" class="page">
-      <div class="page-header">
-        <div class="page-title">Historial</div>
-        <div class="page-desc">Tweets publicados desde esta sesión.</div>
-      </div>
-      <div id="historial-list"></div>
+  <div class="panel" id="right-panel">
+    <div class="panel-title">Tweet listo · 280 chars</div>
+    <div id="panel-content" class="panel-empty">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+      <span>Selecciona una noticia<br>para generar el tweet</span>
     </div>
+  </div>
 
-    <!-- FEEDS -->
-    <div id="page-feeds" class="page">
-      <div class="page-header">
-        <div class="page-title">Feeds RSS</div>
-        <div class="page-desc">Agrega o elimina las fuentes de noticias.</div>
-      </div>
-      <div class="card">
-        <div class="card-label">Fuentes activas</div>
-        <div id="feed-list-ui"></div>
-        <div class="add-row">
-          <input type="text" id="new-feed-input" placeholder="https://sitio.com/feed" />
-          <button class="btn btn-accent" onclick="addFeed()">+ Agregar</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- CREDENCIALES -->
-    <div id="page-credenciales" class="page">
-      <div class="page-header">
-        <div class="page-title">Credenciales API</div>
-        <div class="page-desc">Las claves se guardan en el archivo .env del servidor.</div>
-      </div>
-      <div class="card">
-        <div class="card-label">OAuth 1.0a — X API v2</div>
-        <div class="cred-grid">
-          <div class="cred-field">
-            <label>Consumer Key (API Key)</label>
-            <input type="password" id="c-key" placeholder="••••••••" />
-          </div>
-          <div class="cred-field">
-            <label>Consumer Key Secret</label>
-            <input type="password" id="c-secret" placeholder="••••••••" />
-          </div>
-          <div class="cred-field">
-            <label>Access Token</label>
-            <input type="password" id="a-token" placeholder="••••••••" />
-          </div>
-          <div class="cred-field">
-            <label>Access Token Secret</label>
-            <input type="password" id="a-secret" placeholder="••••••••" />
-          </div>
-        </div>
-        <button class="btn btn-accent" onclick="saveCreds()">Guardar en servidor</button>
-        <p style="margin-top:10px;font-size:11px;color:var(--muted)">⚠ En Render, configura las variables de entorno desde el dashboard. No las escribas aquí en producción.</p>
-      </div>
-
-      <div class="card">
-        <div class="card-label">Estado de conexión</div>
-        <button class="btn" onclick="testConnection()">Verificar conexión con X API</button>
-        <div id="conn-result" style="margin-top:10px;font-size:12px;color:var(--muted)"></div>
-      </div>
-    </div>
-
-  </main>
 </div>
 
-<div id="toast" class="toast"></div>
-
 <script>
-const API = '';
-let feeds = JSON.parse(localStorage.getItem('xp_feeds') || '["https://web.colonaldia.hn/feed/"]');
-let publishedIds = JSON.parse(localStorage.getItem('xp_published') || '[]');
-let historial = JSON.parse(localStorage.getItem('xp_historial') || '[]');
-let loadedItems = [];
+const MAX = 280;
+let feeds = JSON.parse(localStorage.getItem('tg_feeds') || '["https://web.colonaldia.hn/feed/"]');
+let allItems = [];
+let sortedItems = [];
 
 function goTo(page, el) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-  document.getElementById('page-' + page).classList.add('active');
   el.classList.add('active');
-  if (page === 'feeds') renderFeedList();
-  if (page === 'historial') renderHistorial();
+  const isNoticias = page === 'noticias';
+  document.getElementById('main-noticias').style.display = isNoticias ? 'block' : 'none';
+  document.getElementById('main-feeds').style.display = isNoticias ? 'none' : 'block';
+  document.getElementById('right-panel').style.display = isNoticias ? 'flex' : 'none';
+  if (!isNoticias) renderFeedList();
 }
 
-function setStatus(type, text) {
-  const pill = document.getElementById('status-pill');
-  const dot = pill.querySelector('.dot');
-  pill.className = 'status-pill ' + (type === 'loading' ? 'loading' : type === 'error' ? 'error' : 'ok');
-  dot.className = 'dot' + (type === 'loading' ? ' pulse' : '');
-  document.getElementById('status-text').textContent = text;
-}
-
-function showToast(msg, type = 'info') {
-  const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.className = 'toast ' + type + ' show';
-  setTimeout(() => t.classList.remove('show'), 3500);
-}
-
-function updateStats() {
-  const total = loadedItems.length;
-  const pub = loadedItems.filter(i => publishedIds.includes(i.guid)).length;
-  document.getElementById('stat-total').textContent = total;
-  document.getElementById('stat-publicados').textContent = pub;
-  document.getElementById('stat-pendientes').textContent = total - pub;
-}
-
-async function loadNews() {
-  if (!feeds.length) { showToast('No hay feeds configurados.', 'error'); return; }
-  const btn = document.getElementById('btn-load');
-  btn.innerHTML = '<span class="spinner"></span> Cargando...';
-  btn.disabled = true;
-  setStatus('loading', 'Cargando feeds...');
-  loadedItems = [];
-
-  for (const feed of feeds) {
-    try {
-      const res = await fetch(`${API}/api/rss/fetch?url=${encodeURIComponent(feed)}`);
-      if (!res.ok) throw new Error('HTTP ' + res.status);
-      const text = await res.text();
-      const parser = new DOMParser();
-      const xml = parser.parseFromString(text, 'application/xml');
-      const items = Array.from(xml.querySelectorAll('item')).slice(0, 10);
-      const source = (() => { try { return new URL(feed).hostname.replace('www.',''); } catch(e) { return feed; } })();
-      items.forEach(item => {
-        const title = item.querySelector('title')?.textContent?.trim() || '';
-        const link = item.querySelector('link')?.textContent?.trim() || '';
-        const desc = (item.querySelector('description')?.textContent || '').replace(/<[^>]+>/g,'').trim();
-        const guid = item.querySelector('guid')?.textContent || link;
-        let img = '';
-        const enc = item.querySelector('enclosure');
-        if (enc && enc.getAttribute('type')?.startsWith('image')) img = enc.getAttribute('url') || '';
-        if (!img) {
-          const ns = ['media:thumbnail','media:content'];
-          for (const n of ns) {
-            const el = xml.querySelector(n.replace(':','\\:'));
-            if (el) { img = el.getAttribute('url') || ''; break; }
-          }
-        }
-        if (!img) {
-          const m = (item.querySelector('description')?.textContent || '').match(/src=["']([^"']+\.(jpg|jpeg|png|webp))['"]/i);
-          if (m) img = m[1];
-        }
-        if (title) loadedItems.push({ title, link, desc: desc.slice(0,200), guid, img, source });
-      });
-    } catch(e) {
-      showToast('Error en ' + feed + ': ' + e.message, 'error');
-    }
-  }
-
-  btn.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg> Cargar noticias`;
-  btn.disabled = false;
-
-  if (loadedItems.length === 0) {
-    setStatus('error', 'Sin resultados');
-    document.getElementById('news-list').innerHTML = '<div class="empty-state">No se encontraron noticias. Verifica los feeds RSS.</div>';
-    return;
-  }
-
-  setStatus('ok', `${loadedItems.length} noticias · ${feeds.length} fuente(s)`);
-  document.getElementById('feed-count').textContent = `${loadedItems.length} artículos`;
-  document.getElementById('btn-all').style.display = '';
-  updateStats();
-  renderNews();
-}
-
-function renderNews() {
-  const list = document.getElementById('news-list');
-  list.innerHTML = loadedItems.map((item, i) => {
-    const isPub = publishedIds.includes(item.guid);
-    const shortTitle = item.title.slice(0, 70) + (item.title.length > 70 ? '...' : '');
-    return `
-    <div class="news-card ${isPub ? 'published' : ''}" id="ncard-${i}">
-      <div class="news-card-top">
-        ${item.img
-          ? `<img class="news-img" src="${item.img}" alt="" onerror="this.style.display='none'" />`
-          : `<div class="news-img-placeholder"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"/></svg></div>`
-        }
-        <div class="news-body">
-          <div class="news-title">${item.title}</div>
-          <div class="news-desc">${item.desc}</div>
-          <div class="news-meta">${item.source}</div>
-        </div>
-      </div>
-      <div class="news-footer">
-        <div class="tweet-preview-text">📝 ${shortTitle} — ${item.link.slice(0,35)}...</div>
-        ${isPub
-          ? `<span class="badge badge-ok">✓ Publicado</span>`
-          : `<button class="btn btn-publish btn-sm" onclick="publishOne(${i})" id="pbtn-${i}">Publicar en X</button>`
-        }
-        <a href="${item.link}" target="_blank" class="btn btn-sm" style="text-decoration:none">Ver</a>
-      </div>
-    </div>`;
+function renderSidebarFeeds() {
+  document.getElementById('sidebar-feeds').innerHTML = feeds.map(f => {
+    const h = (() => { try { return new URL(f).hostname.replace('www.',''); } catch(e) { return f; } })();
+    return `<div class="feed-sidebar-item"><div class="feed-dot"></div>${h}</div>`;
   }).join('');
 }
 
-async function publishOne(idx) {
-  const item = loadedItems[idx];
-  const btn = document.getElementById('pbtn-' + idx);
-  if (btn) { btn.disabled = true; btn.innerHTML = '<span class="spinner"></span>'; }
-  setStatus('loading', 'Publicando...');
+async function loadNews() {
+  if (!feeds.length) { document.getElementById('top-status').textContent = 'Sin feeds.'; return; }
+  const btn = document.getElementById('btn-load');
+  btn.innerHTML = '<span class="spinner"></span> Cargando...';
+  btn.disabled = true;
+  document.getElementById('top-status').textContent = 'Cargando...';
+  allItems = [];
+  document.getElementById('panel-content').className = 'panel-empty';
+  document.getElementById('panel-content').innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg><span>Selecciona una noticia<br>para generar el tweet</span>`;
 
-  const shortDesc = item.desc.slice(0, 120);
-  const tweetText = `${item.title}\n\n${shortDesc}\n\n${item.link}`;
-
-  try {
-    const res = await fetch(`${API}/api/tweet/publish`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ text: tweetText, imageUrl: item.img || null })
-    });
-    const data = await res.json();
-
-    if (data.ok) {
-      publishedIds.push(item.guid);
-      localStorage.setItem('xp_published', JSON.stringify(publishedIds));
-      historial.unshift({ title: item.title, tweetId: data.tweetId, url: data.url, ts: new Date().toISOString() });
-      localStorage.setItem('xp_historial', JSON.stringify(historial.slice(0, 50)));
-      setStatus('ok', `Publicado: ${item.title.slice(0, 40)}...`);
-      showToast('✓ Tweet publicado en @Mastv_hn', 'success');
-      updateStats();
-      renderNews();
-    } else {
-      setStatus('error', 'Error al publicar');
-      showToast('Error: ' + (data.error || 'Respuesta inesperada'), 'error');
-      if (btn) { btn.disabled = false; btn.textContent = 'Publicar en X'; }
-    }
-  } catch(e) {
-    setStatus('error', 'Error de red');
-    showToast('Error de conexión: ' + e.message, 'error');
-    if (btn) { btn.disabled = false; btn.textContent = 'Publicar en X'; }
+  for (const feed of feeds) {
+    try {
+      const res = await fetch(`/api/rss/fetch?url=${encodeURIComponent(feed)}`);
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      const text = await res.text();
+      const xml = new DOMParser().parseFromString(text, 'application/xml');
+      const source = (() => { try { return new URL(feed).hostname.replace('www.',''); } catch(e) { return feed; } })();
+      Array.from(xml.querySelectorAll('item')).slice(0,15).forEach((item, i) => {
+        const title = item.querySelector('title')?.textContent?.trim() || '';
+        const link = item.querySelector('link')?.textContent?.trim() || '';
+        const desc = (item.querySelector('description')?.textContent || '').replace(/<[^>]+>/g,'').trim();
+        const pubDate = item.querySelector('pubDate')?.textContent || '';
+        let img = '';
+        const enc = item.querySelector('enclosure');
+        if (enc?.getAttribute('type')?.startsWith('image')) img = enc.getAttribute('url') || '';
+        if (!img) { const m = (item.querySelector('description')?.textContent||'').match(/src=["']([^"']+\.(jpg|jpeg|png|webp))['"]/i); if(m) img=m[1]; }
+        if (title) allItems.push({ title, link, desc: desc.slice(0,300), img, source, pubDate, order: i });
+      });
+    } catch(e) { console.error(e); }
   }
+
+  btn.innerHTML = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg> Cargar noticias`;
+  btn.disabled = false;
+
+  if (!allItems.length) {
+    document.getElementById('top-status').textContent = 'Sin resultados';
+    document.getElementById('news-grid').innerHTML = '<div class="empty-state">No se encontraron noticias.</div>';
+    return;
+  }
+  document.getElementById('top-status').textContent = `${allItems.length} noticias`;
+  document.getElementById('count-badge').style.display = '';
+  sortAndRender();
 }
 
-async function publishAll() {
-  const pending = loadedItems.filter(i => !publishedIds.includes(i.guid));
-  if (!pending.length) { showToast('No hay noticias pendientes.', 'info'); return; }
-  showToast(`Publicando ${pending.length} noticias...`, 'info');
-  for (let i = 0; i < loadedItems.length; i++) {
-    if (!publishedIds.includes(loadedItems[i].guid)) {
-      await publishOne(i);
-      await new Promise(r => setTimeout(r, 4000));
-    }
-  }
+function sortAndRender() {
+  const sort = document.getElementById('sort-select').value;
+  sortedItems = [...allItems];
+  if (sort === 'largo') sortedItems.sort((a,b) => b.title.length - a.title.length);
+  else if (sort === 'corto') sortedItems.sort((a,b) => a.title.length - b.title.length);
+  document.getElementById('count-badge').textContent = sortedItems.length + ' noticias';
+  document.getElementById('news-grid').innerHTML = sortedItems.map((item, i) => `
+    <div class="news-card" onclick="selectItem(${i})" id="nc-${i}">
+      <div class="news-card-inner">
+        ${item.img ? `<img class="news-thumb" src="${item.img}" alt="" onerror="this.style.display='none'" />` : `<div class="news-thumb-ph">📰</div>`}
+        <div class="news-body">
+          <div class="news-title">${item.title}</div>
+          <div class="news-desc">${item.desc}</div>
+          <div class="news-meta">${item.source}${item.pubDate ? ' · ' + fmtDate(item.pubDate) : ''}</div>
+        </div>
+      </div>
+    </div>`).join('');
+}
+
+function fmtDate(s) {
+  try { return new Date(s).toLocaleDateString('es-HN',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'}); }
+  catch(e) { return ''; }
+}
+
+function selectItem(i) {
+  document.querySelectorAll('.news-card').forEach((c,j) => c.classList.toggle('selected', j===i));
+  const item = sortedItems[i];
+  // Generar tweet optimizado para 280 chars
+  const LINK_LEN = 23;
+  const SEPARATORS = 4; // \n\n x2
+  const available = MAX - LINK_LEN - SEPARATORS;
+  let title = item.title.trim();
+  let desc = item.desc.replace(/\s+/g,' ').trim();
+  // Título: máximo 60% del espacio disponible
+  const titleBudget = Math.floor(available * 0.6);
+  if (title.length > titleBudget) title = title.slice(0, titleBudget - 1) + '…';
+  // Descripción: lo que quede
+  const descBudget = available - title.length;
+  if (desc.length > descBudget) desc = desc.slice(0, Math.max(0, descBudget - 1)) + '…';
+  const tweet = `${title}\n\n${desc}\n\n${item.link}`;
+  showPanel(tweet);
+}
+
+function showPanel(tweet) {
+  const pc = document.getElementById('panel-content');
+  pc.className = '';
+  pc.innerHTML = `
+    <div class="tweet-box">
+      <textarea class="tweet-textarea" id="tweet-ta" oninput="updateCounter()">${tweet}</textarea>
+      <div class="char-bar"><div class="char-bar-fill" id="char-fill"></div></div>
+      <div class="char-counter">
+        <span style="font-size:11px;color:var(--muted)">restantes</span>
+        <span class="char-num ok" id="char-num">280</span>
+      </div>
+    </div>
+    <button class="btn btn-copy" onclick="copyTweet()">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+      Copiar tweet
+    </button>
+    <button class="btn btn-open-x" onclick="window.open('https://x.com/compose/tweet','_blank')">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+      Abrir X para pegar
+    </button>
+    <div class="copied-msg" id="copied-msg"></div>`;
+  updateCounter();
+}
+
+function updateCounter() {
+  const ta = document.getElementById('tweet-ta');
+  const numEl = document.getElementById('char-num');
+  const fillEl = document.getElementById('char-fill');
+  if (!ta || !numEl || !fillEl) return;
+  let text = ta.value;
+  const urls = text.match(/https?:\/\/\S+/g) || [];
+  let counted = text;
+  urls.forEach(u => { counted = counted.replace(u, '0'.repeat(23)); });
+  const len = counted.length;
+  const rem = MAX - len;
+  numEl.textContent = rem;
+  fillEl.style.width = Math.min(100,(len/MAX)*100) + '%';
+  if (rem < 0) { numEl.className = 'char-num over'; fillEl.style.background = 'var(--danger)'; }
+  else if (rem < 20) { numEl.className = 'char-num warn'; fillEl.style.background = 'var(--warning)'; }
+  else { numEl.className = 'char-num ok'; fillEl.style.background = 'var(--success)'; }
+}
+
+function copyTweet() {
+  const ta = document.getElementById('tweet-ta');
+  if (!ta) return;
+  navigator.clipboard.writeText(ta.value).then(() => {
+    const m = document.getElementById('copied-msg');
+    if (m) { m.textContent = '✓ Copiado'; setTimeout(() => m.textContent = '', 2000); }
+  });
 }
 
 function renderFeedList() {
   const el = document.getElementById('feed-list-ui');
-  if (!feeds.length) { el.innerHTML = '<p style="font-size:12px;color:var(--muted);padding:8px 0">Sin feeds. Agrega uno abajo.</p>'; return; }
-  el.innerHTML = feeds.map((f, i) => `
-    <div class="feed-item">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="color:var(--muted2);flex-shrink:0"><path d="M12.75 19.5v-.75a7.5 7.5 0 00-7.5-7.5H4.5m0-6.75h.75c7.87 0 14.25 6.38 14.25 14.25v.75M6 18.75a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"/></svg>
-      <span>${f}</span>
-      <button class="feed-del" onclick="removeFeed(${i})">×</button>
-    </div>`).join('');
+  if (!feeds.length) { el.innerHTML = '<p style="font-size:12px;color:var(--muted);padding:8px 0">Sin feeds.</p>'; return; }
+  el.innerHTML = feeds.map((f,i) => `<div class="feed-item"><span>${f}</span><button class="feed-del" onclick="removeFeed(${i})">×</button></div>`).join('');
 }
 
 function addFeed() {
@@ -794,46 +331,22 @@ function addFeed() {
   const url = inp.value.trim();
   if (!url || feeds.includes(url)) return;
   feeds.push(url);
-  localStorage.setItem('xp_feeds', JSON.stringify(feeds));
+  localStorage.setItem('tg_feeds', JSON.stringify(feeds));
   inp.value = '';
   renderFeedList();
-  showToast('Feed agregado.', 'success');
+  renderSidebarFeeds();
 }
 
 function removeFeed(i) {
-  feeds.splice(i, 1);
-  localStorage.setItem('xp_feeds', JSON.stringify(feeds));
+  feeds.splice(i,1);
+  localStorage.setItem('tg_feeds', JSON.stringify(feeds));
   renderFeedList();
+  renderSidebarFeeds();
 }
 
-function renderHistorial() {
-  const el = document.getElementById('historial-list');
-  if (!historial.length) { el.innerHTML = '<div class="empty-state">Aún no has publicado nada.</div>'; return; }
-  el.innerHTML = historial.map(h => `
-    <div class="card" style="margin-bottom:10px">
-      <div style="font-family:'Syne',sans-serif;font-size:14px;margin-bottom:4px">${h.title}</div>
-      <div style="font-size:11px;color:var(--muted)">${new Date(h.ts).toLocaleString('es-HN')}</div>
-      ${h.url ? `<a href="${h.url}" target="_blank" class="btn btn-sm" style="margin-top:8px;text-decoration:none;display:inline-flex">Ver tweet →</a>` : ''}
-    </div>`).join('');
-}
-
-function saveCreds() {
-  showToast('Para producción, configura las variables en el dashboard de Render.', 'info');
-}
-
-async function testConnection() {
-  const el = document.getElementById('conn-result');
-  el.textContent = 'Verificando...';
-  try {
-    const res = await fetch(`${API}/health`);
-    const data = await res.json();
-    el.style.color = 'var(--success)';
-    el.textContent = '✓ Backend activo: ' + data.service;
-  } catch(e) {
-    el.style.color = 'var(--danger)';
-    el.textContent = '✗ No se pudo conectar al backend.';
-  }
-}
+renderSidebarFeeds();
+document.getElementById('main-feeds').style.display = 'none';
+document.getElementById('main-noticias').style.display = 'block';
 </script>
 </body>
 </html>
